@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/StS-DefaultModBase-master/Tamer/Tamer.iml" filepath="$PROJECT_DIR$/StS-DefaultModBase-master/Tamer/Tamer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TheTamer.iml" filepath="$PROJECT_DIR$/.idea/TheTamer.iml" />
+    </modules>
+  </component>
+</project>
