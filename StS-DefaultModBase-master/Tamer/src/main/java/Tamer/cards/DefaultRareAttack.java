@@ -15,11 +15,7 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultRareAttack extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * TOUCH Deal 30(35) damage.
-     */
+
 
 
     // TEXT DECLARATION 

@@ -7,8 +7,10 @@ import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.defect.EvokeOrbAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import Tamer.DefaultMod;
@@ -27,7 +29,7 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
 
     // ID, images, text.
     public static final String ID = DefaultMod.makeID("DefaultClickableRelic");
-
+    public static  int tameDamage=0;
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("default_clickable_relic.png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("default_clickable_relic.png"));
 
@@ -53,13 +55,18 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
             usedThisTurn = true; // Set relic as "Used this turn"
             flash(); // Flash
             stopPulse(); // And stop the pulsing animation (which is started in atPreBattle() below)
+            AbstractMonster tameM= AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
+   // Player speech bubble saying "YOU ARE MINE!" (See relic strings)
 
-            AbstractDungeon.actionManager.addToBottom(new TalkAction(true, DESCRIPTIONS[1], 4.0f, 2.0f)); // Player speech bubble saying "YOU ARE MINE!" (See relic strings)
-            AbstractDungeon.actionManager.addToBottom(new SFXAction("MONSTER_COLLECTOR_DEBUFF")); // Sound Effect Action of The Collector Nails
-            AbstractDungeon.actionManager.addToBottom(new VFXAction( // Visual Effect Action of the nails applies on a random monster's position.
-                    new CollectorCurseEffect(AbstractDungeon.getRandomMonster().hb.cX, AbstractDungeon.getRandomMonster().hb.cY), 2.0F));
+            if (tameM.currentHealth<tameM.maxHealth*.5){
+                tameDamage= tameM.getIntentDmg();
+                int killD=tameM.currentHealth;
+                DamageInfo g =new DamageInfo(AbstractDungeon.player, killD, DamageInfo.DamageType.NORMAL);
+                tameM.damage(g);
 
-            AbstractDungeon.actionManager.addToBottom(new EvokeOrbAction(1)); // Evoke your rightmost orb
+
+
+            }
         }
         // See that talk action? It has DESCRIPTIONS[1] instead of just hard-coding "You are mine" inside.
         // DO NOT HARDCODE YOUR STRINGS ANYWHERE, it's really bad practice to have "Strings" in your code:
@@ -85,6 +92,9 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
     public void atTurnStart() {
         usedThisTurn = false;  // Resets the used this turn. You can remove this to use a relic only once per combat rather than per turn.
         isPlayerTurn = true; // It's our turn!
+
+        DamageInfo d =new DamageInfo(AbstractDungeon.player, tameDamage, DamageInfo.DamageType.NORMAL);
+        AbstractDungeon.getCurrRoom().monsters.getRandomMonster().damage(d);
         beginLongPulse(); // Pulse while the player can click on it.
     }
     

@@ -1,24 +1,25 @@
 package Tamer.cards;
 
+import Tamer.DefaultMod;
+import Tamer.characters.Tamer;
+import basemod.AutoAdd;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import Tamer.DefaultMod;
-import Tamer.characters.Tamer;
 
 import static Tamer.DefaultMod.makeCardPath;
 
-public class DefaultAttackWithVariable extends AbstractDynamicCard {
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 
 
+public class PerfectShotRA extends AbstractDynamicCard {
 
-    // TEXT DECLARATION
 
-    public static final String ID = DefaultMod.makeID(DefaultAttackWithVariable.class.getSimpleName());
+    public static final String ID = DefaultMod.makeID(PerfectShotRA.class.getSimpleName());
     public static final String IMG = makeCardPath("Attack.png");
 
     // /TEXT DECLARATION/
@@ -26,39 +27,41 @@ public class DefaultAttackWithVariable extends AbstractDynamicCard {
 
     // STAT DECLARATION
 
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.ATTACK;
     public static final CardColor COLOR = Tamer.Enums.COLOR_GRAY;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 7;
-    private static final int UPGRADE_PLUS_DMG = 1;
+    private static final int UPGRADED_COST = 0;
 
-    public int specialDamage;
+    private static final int DAMAGE = 10;
+    private static final int UPGRADE_PLUS_DMG = 4;
 
     // /STAT DECLARATION/
 
-    public DefaultAttackWithVariable() {
+
+    public PerfectShotRA() {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
-
-        isMultiDamage = true;
     }
+
+
+
 
     // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // Create an int which equals to your current energy.
-        int effect = EnergyPanel.totalCount;
+        AbstractDungeon.actionManager.addToBottom(
+                new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        if(m.hasPower("Vulnerable")){
+            AbstractDungeon.player.gainEnergy(1);
+        }else {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber, true, AbstractGameAction.AttackEffect.NONE));
 
-        // For each energy, create 1 damage action.
-        for (int i = 0; i < effect; i++) {
-            AbstractDungeon.actionManager.addToBottom(
-                    new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-                            AbstractGameAction.AttackEffect.FIRE));
         }
     }
+
 
     // Upgraded stats.
     @Override
@@ -66,6 +69,7 @@ public class DefaultAttackWithVariable extends AbstractDynamicCard {
         if (!upgraded) {
             upgradeName();
             upgradeDamage(UPGRADE_PLUS_DMG);
+            upgradeBaseCost(UPGRADED_COST);
             initializeDescription();
         }
     }

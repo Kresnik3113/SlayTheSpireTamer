@@ -12,11 +12,7 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultUncommonSkill extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * A Better Defend Gain 1 Plated Armor. Affected by Dexterity.
-     */
+
 
     // TEXT DECLARATION 
 

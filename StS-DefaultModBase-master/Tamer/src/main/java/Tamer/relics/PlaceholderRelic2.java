@@ -13,11 +13,6 @@ import static Tamer.DefaultMod.makeRelicOutlinePath;
 import static Tamer.DefaultMod.makeRelicPath;
 
 public class PlaceholderRelic2 extends CustomRelic {
-    /*
-     * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
-     *
-     * At the start of each combat, gain 1 Strength (i.e. Vajra)
-     */
 
     // ID, images, text.
     public static final String ID = DefaultMod.makeID("PlaceholderRelic2");

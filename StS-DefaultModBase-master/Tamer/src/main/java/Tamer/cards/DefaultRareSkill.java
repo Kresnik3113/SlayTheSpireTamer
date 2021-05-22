@@ -14,11 +14,8 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultRareSkill extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * For Each Loop x2" "Apply 1 Vulnerable to all enemies, 2(3) times.
-     */
+
+
 
     // TEXT DECLARATION 
 

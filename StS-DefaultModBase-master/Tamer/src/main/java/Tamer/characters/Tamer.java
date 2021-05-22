@@ -32,24 +32,16 @@ import java.util.ArrayList;
 import static Tamer.DefaultMod.*;
 import static Tamer.characters.Tamer.Enums.COLOR_GRAY;
 
-//Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
-//and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
-//All text (starting description and loadout, anything labeled TEXT[]) can be found in DefaultMod-character-Strings.json in the resources
 
 public class Tamer extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(DefaultMod.class.getName());
 
-    // =============== CHARACTER ENUMERATORS =================
-    // These are enums for your Characters color (both general color and for the card library) as well as
-    // an enum for the name of the player class - IRONCLAD, THE_SILENT, DEFECT, YOUR_CLASS ...
-    // These are all necessary for creating a character. If you want to find out where and how exactly they are used
-    // in the basegame (for fun and education) Ctrl+click on the PlayerClass, CardColor and/or LibraryType below and go down the
-    // Ctrl+click rabbit hole
+
 
     public static class Enums {
         @SpireEnum
         public static AbstractPlayer.PlayerClass THE_DEFAULT;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR") // These two HAVE to have the same absolutely identical name.
+        @SpireEnum(name = "DEFAULT_GRAY_COLOR")
         public static AbstractCard.CardColor COLOR_GRAY;
         @SpireEnum(name = "DEFAULT_GRAY_COLOR") @SuppressWarnings("unused")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
@@ -61,8 +53,8 @@ public class Tamer extends CustomPlayer {
     // =============== BASE STATS =================
 
     public static final int ENERGY_PER_TURN = 3;
-    public static final int STARTING_HP = 75;
-    public static final int MAX_HP = 75;
+    public static final int STARTING_HP = 90;
+    public static final int MAX_HP = 90;
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 9;
     public static final int ORB_SLOTS = 3;
@@ -109,7 +101,7 @@ public class Tamer extends CustomPlayer {
         // =============== TEXTURES, ENERGY, LOADOUT =================  
 
         initializeClass(null, // required call to load textures and setup energy/loadout.
-                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
+
                 THE_DEFAULT_SHOULDER_2, // campfire pose
                 THE_DEFAULT_SHOULDER_1, // another campfire pose
                 THE_DEFAULT_CORPSE, // dead corpse
@@ -183,7 +175,6 @@ public class Tamer extends CustomPlayer {
         retVal.add(DefaultClickableRelic.ID);
 
         // Mark relics as seen - makes it visible in the compendium immediately
-        // If you don't have this it won't be visible in the compendium until you see them in game
         UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
         UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
         UnlockTracker.markRelicAsSeen(DefaultClickableRelic.ID);
@@ -268,9 +259,6 @@ public class Tamer extends CustomPlayer {
         return DefaultMod.DEFAULT_GRAY;
     }
 
-    // Should return an AttackEffect array of any size greater than 0. These effects
-    // will be played in sequence as your character's finishing combo on the heart.
-    // Attack effects are the same as used in DamageAction and the like.
     @Override
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
         return new AbstractGameAction.AttackEffect[]{
@@ -279,17 +267,13 @@ public class Tamer extends CustomPlayer {
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY};
     }
 
-    // Should return a string containing what text is shown when your character is
-    // about to attack the heart. For example, the defect is "NL You charge your
-    // core to its maximum..."
+
     @Override
     public String getSpireHeartText() {
         return TEXT[1];
     }
 
-    // The vampire events refer to the base game characters as "brother", "sister",
-    // and "broken one" respectively.This method should return a String containing
-    // the full text that will be displayed as the first screen of the vampires event.
+
     @Override
     public String getVampireText() {
         return TEXT[2];

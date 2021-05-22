@@ -56,9 +56,7 @@ public class RarePower extends AbstractPower implements CloneablePowerInterface 
             playCard.purgeOnUse = true;
         }
 
-        // Remove completely on use (Not Exhaust). A note - you don't need the '{}' in this if statement,
-        // as it's just 1 line directly under. You can remove them, if you want. In fact, you can even put it all on 1 line:
-        //  if (playCard.type != AbstractCard.CardType.POWER) playCard.purgeOnUse = true; - works identically
+
 
         AbstractDungeon.actionManager.addToBottom(new NewQueueCardAction(playCard, targetMonster)); // Play the card on the target.
     }

@@ -13,11 +13,7 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultUncommonAttack extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * Big Slap Deal 10(15)) damage.
-     */
+
 
     // TEXT DECLARATION 
 

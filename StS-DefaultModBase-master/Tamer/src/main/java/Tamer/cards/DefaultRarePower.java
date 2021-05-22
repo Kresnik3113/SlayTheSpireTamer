@@ -13,11 +13,6 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultRarePower extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * In-Progress Form At the start of your turn, play a TOUCH.
-     */
 
     // TEXT DECLARATION 
 
@@ -47,7 +42,7 @@ public class DefaultRarePower extends AbstractDynamicCard {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = MAGIC;
 
-        this.tags.add(BaseModCardTags.FORM); //Tag your strike, defend and form cards so that they work correctly.
+        this.tags.add(BaseModCardTags.FORM);
 
     }
 

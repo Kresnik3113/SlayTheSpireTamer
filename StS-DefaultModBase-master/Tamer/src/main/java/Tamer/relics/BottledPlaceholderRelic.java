@@ -26,20 +26,11 @@ import static Tamer.DefaultMod.makeRelicOutlinePath;
 import static Tamer.DefaultMod.makeRelicPath;
 
 public class BottledPlaceholderRelic extends CustomRelic implements CustomBottleRelic, CustomSavable<Integer> {
-    // This file will show you how to use 2 things - (Mostly) The Custom Bottle Relic and the Custom Savable - they go hand in hand.
 
-    /*
-     * https://github.com/daviscook477/BaseMod/wiki/Custom-Savable
-     *
-     * Choose a card. Whenever you play any card, draw the chosen card.
-     */
 
-    // BasemodWiki Says: "When you need to store a value on a card or relic between runs that isn't a relic's counter value
-    // or a card's misc value, you use a custom savable to save and load it between runs."
+    private static AbstractCard card;
+    private boolean cardSelected = true;
 
-    private static AbstractCard card;  // The field value we wish to save in this case is the card that's going to be in our bottle.
-    private boolean cardSelected = true; // A boolean to indicate whether or not we selected a card for bottling.
-    // (It's set to false on Equip)
 
 
     // ID, images, text.
@@ -53,9 +44,6 @@ public class BottledPlaceholderRelic extends CustomRelic implements CustomBottle
         tips.add(new PowerTip(name, description));
     }
 
-    // Now, for making Bottled cards we need a small patch - our own custom SpireField
-    // I've included that already in patches.relics.BottledPlaceholderField
-    // The basemod wiki I linked above has comments about onSave and onLoad
 
     @Override
     public Predicate<AbstractCard> isOnCard() {
@@ -132,7 +120,6 @@ public class BottledPlaceholderRelic extends CustomRelic implements CustomBottle
     }
 
 
-    // And finally after all that we can code in the actual relic mechanic
     public void onUseCard(AbstractCard targetCard, UseCardAction useCardAction) { // Whenever we use any card
         boolean fullHandDialog = false; // Create a boolean (to prevent multiple "My hand is full!" dialogues if we have multiple cards bottled)
 

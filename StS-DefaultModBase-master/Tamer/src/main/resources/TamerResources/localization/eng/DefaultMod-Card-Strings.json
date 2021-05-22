@@ -49,5 +49,9 @@
   "Tamer:OrbSkill": {
     "NAME": "Get Orb",
     "DESCRIPTION": "Channel 1 Default Orb."
+  },
+  "Tamer:PerfectShotRA": {
+    "NAME": "PerfectShot",
+    "DESCRIPTION": "Deal 10 damage, gain energy if enemy has !M! Vulnerable, if not apply it."
   }
 }

@@ -11,12 +11,6 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultCommonSkill extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * Defend Gain 5 (8) block.
-     */
-
 
     // TEXT DECLARATION
 
@@ -45,7 +39,7 @@ public class DefaultCommonSkill extends AbstractDynamicCard {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
         baseBlock = BLOCK;
 
-        this.tags.add(CardTags.STARTER_DEFEND); //Tag your strike, defend and form (Wraith form, Demon form, Echo form, etc.) cards so that they function correctly.
+        this.tags.add(CardTags.STARTER_DEFEND);
     }
 
     // Actions the card should do.

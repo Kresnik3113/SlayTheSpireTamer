@@ -14,11 +14,7 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class OrbSkill extends AbstractDynamicCard {
 
-    /*
-     * Orb time.
-     *
-     * Channel 1 Default Orb.
-     */
+
 
     // TEXT DECLARATION
 

@@ -13,19 +13,6 @@ import static Tamer.DefaultMod.makeCardPath;
 
 public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * Using the second magic number isn't very confusing, you just declare and use it the absolutely the same way you would your
-     * your other ones (attack, block, magic, etc.)
-     *
-     * For how to create it, check out:
-     * https://github.com/daviscook477/BaseMod/wiki/Dynamic-Variables
-     * The files in this base that detail this are:
-     * variables.DefaultSecondMagicNumber and cards.AbstractDefaultCard
-     *
-     * Apply 2(5) vulnerable and 4(9) poison to an enemy.
-     */
 
     // TEXT DECLARATION
 
