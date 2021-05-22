@@ -75,18 +75,16 @@ public class BottledPlaceholderRelic extends CustomRelic implements CustomBottle
 
 
     @Override
-    public void onEquip() { // 1. When we acquire the relic
-        cardSelected = false; // 2. Tell the relic that we haven't bottled the card yet
-        if (AbstractDungeon.isScreenUp) { // 3. If the map is open - hide it.
+    public void onEquip() {
+        cardSelected = false;
+        if (AbstractDungeon.isScreenUp) {
             AbstractDungeon.dynamicBanner.hide();
             AbstractDungeon.overlayMenu.cancelButton.hide();
             AbstractDungeon.previousScreen = AbstractDungeon.screen;
         }
         AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.INCOMPLETE;
-        // 4. Set the room to INCOMPLETE - don't allow us to use the map, etc.
-        CardGroup group = CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck); // 5. Get a card group of all currently unbottled cards
+        CardGroup group = CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck);
         AbstractDungeon.gridSelectScreen.open(group, 1, DESCRIPTIONS[3] + name + DESCRIPTIONS[2], false, false, false, false);
-        // 6. Open the grid selection screen with the cards from the CardGroup we specified above. The description reads "Select a card to bottle for" + (relic name) + "."
     }
 
 
@@ -105,17 +103,16 @@ public class BottledPlaceholderRelic extends CustomRelic implements CustomBottle
         super.update(); //Do all of the original update() method in AbstractRelic
 
         if (!cardSelected && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-            // If the card hasn't been bottled yet and we have cards selected in the gridSelectScreen (from onEquip)
-            cardSelected = true; //Set the cardSelected boolean to be true - we're about to bottle the card.
-            card = AbstractDungeon.gridSelectScreen.selectedCards.get(0); // The custom Savable "card" is going to equal
-            // The card from the selection screen (it's only 1, so it's at index 0)
-            BottledPlaceholderField.inBottledPlaceholderField.set(card, true); // Use our custom spire field to set that card to be bottled.
+
+            cardSelected = true;
+            card = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
+            BottledPlaceholderField.inBottledPlaceholderField.set(card, true);
             if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.INCOMPLETE) {
                 AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             }
-            AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE; // The room phase can now be set to complete (From INCOMPLETE in onEquip)
-            AbstractDungeon.gridSelectScreen.selectedCards.clear(); // Always clear your grid screen after using it.
-            setDescriptionAfterLoading(); // Set the description to reflect the bottled card (the method is at the bottom of this file)
+            AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
+            AbstractDungeon.gridSelectScreen.selectedCards.clear();
+            setDescriptionAfterLoading();
         }
     }
 
@@ -124,12 +121,9 @@ public class BottledPlaceholderRelic extends CustomRelic implements CustomBottle
         boolean fullHandDialog = false; // Create a boolean (to prevent multiple "My hand is full!" dialogues if we have multiple cards bottled)
 
         for (Iterator<AbstractCard> it = AbstractDungeon.player.drawPile.group.iterator(); it.hasNext(); ) {
-            // Create a new Iterator called "it" that checks for all AbstractCards in our draw pile. For each card:
             AbstractCard card = it.next(); // create a new AbstractCard named "card" which is equal to the current card in the for each loop
             if (BottledPlaceholderField.inBottledPlaceholderField.get(card)) { // Check if our SpireField matches said card
-                // Essentially, we end up with: Check if the draw pile has a card that is bottled with this bottle
 
-                // So, once we find a card that is bottled:
 
                 this.flash(); // The relic flashes
                 it.remove(); // Remove that card from the iterator (to prevent infinite loops)

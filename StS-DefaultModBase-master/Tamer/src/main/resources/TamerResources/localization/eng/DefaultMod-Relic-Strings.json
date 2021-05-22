@@ -15,10 +15,10 @@
   },
   "Tamer:DefaultClickableRelic": {
     "NAME": "Tamer",
-    "FLAVOR": "Thztrhevoked in your lifetime.",
+    "FLAVOR": "Hit them with their on attack!",
     "DESCRIPTIONS": [
 
-      "TAME!"
+      "If an enemies hp is less than 50% Takes an enemies attack for the player to be used at a random enemy every turn, also damages an enemy with their current hp"
     ]
   },
   "Tamer:BottledPlaceholderRelic": {

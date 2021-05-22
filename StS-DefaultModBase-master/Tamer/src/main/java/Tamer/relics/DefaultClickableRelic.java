@@ -20,12 +20,6 @@ import static Tamer.DefaultMod.makeRelicOutlinePath;
 import static Tamer.DefaultMod.makeRelicPath;
 
 public class DefaultClickableRelic extends CustomRelic implements ClickableRelic { // You must implement things you want to use from StSlib
-    /*
-     * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
-     * StSLib for Clickable Relics
-     *
-     * Usable once per turn. Right click: Evoke your rightmost orb.
-     */
 
     // ID, images, text.
     public static final String ID = DefaultMod.makeID("DefaultClickableRelic");
@@ -68,19 +62,7 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
 
             }
         }
-        // See that talk action? It has DESCRIPTIONS[1] instead of just hard-coding "You are mine" inside.
-        // DO NOT HARDCODE YOUR STRINGS ANYWHERE, it's really bad practice to have "Strings" in your code:
 
-        /*
-         * 1. It's bad for if somebody likes your mod enough (or if you decide) to translate it.
-         * Having only the JSON files for translation rather than 15 different instances of "Dexterity" in some random cards is A LOT easier.
-         *
-         * 2. You don't have a centralised file for all strings for easy proof-reading. If you ever want to change a string
-         * you don't have to go through all your files individually/pray that a mass-replace doesn't screw something up.
-         *
-         * 3. Without hardcoded strings, editing a string doesn't require a compile, saving you time (unless you clean+package).
-         *
-         */
     }
     
     @Override
