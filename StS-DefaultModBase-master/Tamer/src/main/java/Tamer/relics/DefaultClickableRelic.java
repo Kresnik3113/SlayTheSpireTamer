@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.defect.EvokeOrbAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -15,6 +16,9 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import Tamer.DefaultMod;
 import Tamer.util.TextureLoader;
+import kobting.friendlyminions.characters.AbstractPlayerWithMinions;
+import kobting.friendlyminions.monsters.AbstractFriendlyMonster;
+
 
 import static Tamer.DefaultMod.makeRelicOutlinePath;
 import static Tamer.DefaultMod.makeRelicPath;
@@ -50,6 +54,11 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
             flash(); // Flash
             stopPulse(); // And stop the pulsing animation (which is started in atPreBattle() below)
             AbstractMonster tameM= AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
+//            tameM.getIntentDmg();
+//            AbstractPlayer abstractPlayer=AbstractDungeon.player;
+//            AbstractFriendlyMonster m= (AbstractFriendlyMonster) tameM;
+//            AbstractPlayerWithMinions player = (AbstractPlayerWithMinions) abstractPlayer;
+//            player.addMinion(m);
    // Player speech bubble saying "YOU ARE MINE!" (See relic strings)
 
             if (tameM.currentHealth<tameM.maxHealth*.5){
@@ -57,6 +66,8 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
                 int killD=tameM.currentHealth;
                 DamageInfo g =new DamageInfo(AbstractDungeon.player, killD, DamageInfo.DamageType.NORMAL);
                 tameM.damage(g);
+
+                AbstractMonster p= AbstractDungeon.getCurrRoom().monsters.getRandomMonster();
 
 
 
